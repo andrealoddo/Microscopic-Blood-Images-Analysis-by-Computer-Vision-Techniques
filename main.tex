@@ -95,6 +95,11 @@
   long  = Complete Blood Count,
   class = abbrev
 }
+\DeclareAcronym{CHUV}{
+short = CHUV ,
+long  = Centre Hospitalier Universitaire Vaudois,
+class = abbrev
+}
 \DeclareAcronym{Con}{
   short = Con ,
   long  = Contrast ,
@@ -1151,10 +1156,10 @@ A further problem in the analysis of peripheral blood cell images is the presenc
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=0.25\textwidth]{images/2016_1_mva/clump}
-	\caption{\label{fig_clumps}Leukocyte clump in a sample image taken from ALL-IDB1.}
+	\caption{\label{fig_clumps}Crop of a sample image taken from ALL-IDB1. It represents a leukocyte clump.}
 \end{figure}
 
-The step of feature extraction is very important in the analysis of peripheral blood cells, as only with significant features, the system will be able to discriminate the various types of cells, the cells affected by diseases from the normal ones or the presence of other abnormalities in the blood. The idea is to extract the descriptors that best approach to the visual patterns indicated by pathologists. The colour and texture descriptors are certainly the most discriminatory features of blood cells. Generally this kind of images are acquired using the RGB color space that allows a good discrimination of platelets, red blood cells and white blood cells, especially if the analysis is extended to all RGB channels \cite{Angulo}. However, the discrimination of subclasses of cells such as various types of leukocytes, usually requires the use of other colour spaces, taking into account all the colour channels or only the most discriminatory such as the H channel of the HSV colour space \cite{Hengen}. Furthermore, geometrical features can be used to discriminate cells with abnormal size or with irregular shape. Other geometrical features have been specifically proposed to classify the type of nucleated cells, since they can be distinguished not only using the ratio between cytoplasm and nucleus \cite{Piuri, Sco05, Sco06} but also extracting the number of lobes of the nucleus. Extract the number of lobes means count the more substantial parts of the nucleus connected by thin filaments. This is not an easy task, since the connection between the lobes sometimes can appear larger than normal and thus, also a skilled operator, could count two small lobes as it was only one. A good approximation of the number of lobes can be obtained by iterative erosion of the nucleus. The number of lobes correspond to the connected components with an area bigger than a prefixed parameter \cite{Piuri}.  
+The step of feature extraction is very important in the analysis of peripheral blood cells, as only with significant features, the system will be able to discriminate the various types of cells, the cells affected by diseases from the normal ones or the presence of other abnormalities in the blood. The idea is to extract the descriptors that best approach to the visual patterns indicated by pathologists. The colour and texture descriptors are certainly the most discriminatory features of blood cells. Generally this kind of images are acquired using the RGB colour space that allows a good discrimination of platelets, red blood cells and white blood cells, especially if the analysis is extended to all RGB channels \cite{Angulo}. However, the discrimination of subclasses of cells such as various types of leukocytes, usually requires the use of other colour spaces, taking into account all the colour channels or only the most discriminatory such as the H channel of the HSV colour space \cite{Hengen}. Furthermore, geometrical features can be used to discriminate cells with abnormal size or with irregular shape. Other geometrical features have been specifically proposed to classify the type of nucleated cells, since they can be distinguished not only using the ratio between cytoplasm and nucleus \cite{Piuri, Sco05, Sco06} but also extracting the number of lobes of the nucleus. Extract the number of lobes means count the more substantial parts of the nucleus connected by thin filaments. This is not an easy task, since the connection between the lobes sometimes can appear larger than normal and thus, also a skilled operator, could count two small lobes as it was only one. A good approximation of the number of lobes can be obtained by iterative erosion of the nucleus. The number of lobes correspond to the connected components with an area bigger than a prefixed parameter \cite{Piuri}.  
 
 Once the features have been extracted they must be inserted in a process which classifies cells based on haematological concepts \cite{Biondi, Serbouti}. Different learning methods have been used to classify blood cells, but above all very different choices about the number of classes have been taken. The choice taken more frequently is the binary classification to distinguish healthy white blood cells from abnormal ones making use of the SVM classifier, which is excellent in the separation of binary classes with pattern very close in space \cite{Mohapatra10a, Mohapatra10b, Mohapatra10c, Mohapatra14}. Instead, when the number of classes is higher the most used classifier have been the Neural Networks, performing a separation into the five types of leukocytes \cite{Sco06} or performing a separation into 7 classes, lymphocytes, neutrophils, eosinophils, other (monocytes and basophils), lymphocytic leukaemia L1, lymphocytic leukaemia L2 and non-lymphocytic leukaemia \cite{Buavirat}. 
 
@@ -1241,12 +1246,12 @@ All five species may appear in four different life-cycle stages during the infec
 The life-cycle-stage of the parasite is defined by its morphology, size and the presence or absence of malarial pigment.
 The species differ in the changes of infected cell's shape, presence of some characteristic dots and the morphology of the parasite in some of the life-cycle-stages \cite{Somasekar2011}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{images/malaria/f2_Pfalciparum}
-	\includegraphics[width=6cm]{images/malaria/f2_Pvivax}
-	\includegraphics[width=6cm]{images/malaria/f2_Povale}
-	\includegraphics[width=6cm]{images/malaria/f2_Pmalariae}
+	\hspace{-1.5mm}\includegraphics[width=0.48\textwidth]{images/malaria/f2_Pfalciparum}\vspace{1 mm}
+	\includegraphics[width=0.48\textwidth]{images/malaria/f2_Pvivax}
+	\includegraphics[width=0.48\textwidth]{images/malaria/f2_Povale}
+	\includegraphics[width=0.48\textwidth]{images/malaria/f2_Pmalariae}
 	\caption{\label{fig:malaria_types}Types of human malaria parasites: from left to right, \emph{P. falciparum} in its schizont stage, \emph{P. vivax} in two gametocytes specimens and one ring stage, \emph{P. ovale} in its ring stage, \emph{P. malariae} in its schizont stage.
 		Courtesy of CHUV, Lausanne.}
 \end{figure}
@@ -1370,7 +1375,7 @@ Generally speaking, features may be distinguished according to the following cha
 It is a well known mathematical morphology approach to compute a size distribution of grains in binary images, using a series of morphological opening operations. It is the basis for the characterization of the concept of size. Some authors used area granulometry for preprocessing purposes in malaria characterization \cite{Tek2010}, even though it is certainly effective for extracting cell size features' information \cite{Springl2009,Tek2006,Malihi2013}. In \cite{Tek2010}, local area granulometry combined with colour histogram are used as features. The area granulometry feature is calculated locally on the binary mask of the stained objects, for the RGB channels, and then concatenated. Morphological features are also used in \cite{Ross2006} (erosion dilation), in \cite{Das2011} (opening, closing) and in \cite{DiRuberto2002} (skeleton) to classify parasites.
 % Feature extraction ends
 
-	\begin{figure}[!t]
+\begin{figure}[!t]
 	\centering
 	\includegraphics[width=6.5cm]{images/malaria/f2_Pfalciparum_rect}
 	\includegraphics[width=6.5cm]{images/malaria/f2_Pvivax_rect}
@@ -1444,20 +1449,21 @@ Mean Shift technique was originally proposed in 1975 by Fukunaga \cite{fukunaga}
 
 \subsection{Experimental evaluation}
 Remembering that our starting objective was to segment white blood cells, now we explain how this classification method can be used to reach our segmentation purposes and targets. Support Vector Machine (SVM) has been chosen in order to perform a classification of every single pixel belonging to the images we have to segment, according to the method proposed in \cite{Pan}. Once the Mean Shift has been performed on a certain training set, we use a set of these produced images to train the different SVM we realized. As a comparison, we also segment every single dataset image with classic segmentation methods. It is done to execute a more in-depth analysis of our study. The \textbf{first strategy} works as a normal binary SVM classifier, hence we have exactly two classes in which the pixels will be classified: the positive class groups together the white blood cell nuclei and cytoplasm pixels, instead the negative class represents pixels belonging to erythrocytes or background. Fig.~\ref{fig:exs1} shows the segmentation result using this solution, in which the WBC is exactly recognized and segmented, but the lighter region of erythrocytes is misclassified as WBC region. The \textbf{second strategy} substantially works like the first one, with the main difference that we exclude from the training samples all the pixels belonging to the cytoplasm, in order to avoid misclassification due to similarities with the lighter region of erythrocytes. Fig.~\ref{fig:exs1} shows the segmentation result using this solution. Again the nucleus is well detected but for determined classes of WBCs the cytoplasm is not well detected. The \textbf{third strategy} is based on the results obtained with the two previous versions. In fact the classifier needs more valid training samples for cytoplasm only. So, in last version we perform a three-class SVM, using both the pixels belonging from WBCs nuclei (class 1) and both pixels belonging to the WBCs cytoplasm (class 2). Thus, pixels belonging to erythrocytes or background are labelled with class 3. Note that for this approach only classic segmentation have been used to produce pure samples for the SVM, because Mean Shift segmentation merge together both WBC nucleus and cytoplasm. A Mean Shift alteration could be done to adapt it for our purposes, but we have chosen to use classic method for simplicity. Fig.~\ref{fig:exs1} and shows the segmentation result using this solution in which both nucleus and cytoplasm are well detected.
-\begin{figure}[!b]
+
+\begin{figure}[h]
 	\centering
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/3-1}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/3-2}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/3-3}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/1-1}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/1-2}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/1-3}\vspace{1mm}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/2-1}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/2-3}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/2-4}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/4-1}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/4-2}
-	\includegraphics[height=0.10\textheight, width=0.10\textheight]{images/2015_1_caip/4-3}
+	\hspace{-1.5mm}\includegraphics[width=0.14\textwidth]{images/2015_1_caip/3-1}\vspace{1 mm}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/3-2}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/3-3}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/1-1}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/1-2}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/1-3}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/2-1}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/2-3}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/2-4}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/4-1}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/4-2}
+	\includegraphics[width=0.14\textwidth]{images/2015_1_caip/4-3}
 	\caption{\label{fig:exs1} (Top) From left to right: training original image from ALL-IDB2, manually segmented nucleus and cytoplasm; test original image, segmentation result for nucleus an cytoplasm with the first strategy. (Bottom) From left to right: test original image, segmentation result for nucleus an cytoplasm with the second strategy; test original image, segmentation result for nucleus an cytoplasm with the third strategy}
 \end{figure}
 
@@ -1523,27 +1529,8 @@ Finally, the ground-truth images previously described have been compared with th
 This segmentation solution has been developed by following the idea described in the previous chapter and improving it.
 Basically, the same settings of the previous schema have been maintained, from the dataset to materials. Method is following presented.
 The first step of the algorithm is to apply a classic segmentation method to obtain pure samples related to the regions of white blood cells nucleus and cytoplasm, mature erythrocytes and background. The pixels obtained from these regions have been reduced in number through a Nearest Neighbour  Search (NNS) by removing any duplicates or elements with distance next to zero. Even in this case, SVM has been chosen due to the excellent results of the previous method. Once the manually segmented images have been obtained on a certain training set, we used a set of these produced images to train the different SVM we realized. Then, we tuned three different strategies. 
-The \textbf{first strategy} works as a normal binary SVM classifier, hence we have exactly two classes in which the pixels will be classified: the positive class groups together the white blood cell nuclei and cytoplasm pixels, instead the negative class represents pixels belonging to erythrocytes or background. Fig.~\ref{fig:exs2} shows the segmentation result using this solution, in which the WBC is exactly recognized and segmented, but the lighter region of erythrocytes are misclassified as WBC region. 
-The \textbf{second strategy} basically works like the first one, with a main difference. We have excluded, indeed, from the training samples all the pixels belonging to the cytoplasm, in order to avoid misclassification due to similarities with the lighter region of erythrocytes. Fig.~\ref{fig:exs2} shows the segmentation result using this solution. Again, the nucleus is well detected but for determined classes of WBCs the cytoplasm is not well detected. 
-The \textbf{third strategy} is based on the results obtained with the two previous version. In fact the classifier needs more valid training samples for cytoplasm only. So, in this version we performed a three-class SVM, using both the pixels belonging from WBCs nuclei (class 1) and both pixels belonging to the WBCs cytoplasm (class 2). Thus, pixels belonging to erythrocytes or background are labelled with class 3. Fig.~\ref{fig:exs2} shows the segmentation result using this solution in which both nucleus and cytoplasm are very well detected.
-\begin{figure}[!b]
-	\centering
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/3-1}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/3-2}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/3-3}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/1-1}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/1-2}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/1-3}\vspace{0.5mm}
-
-	\hspace{1.3mm}\includegraphics[height=0.10\textheight]{images/2015_1_caip/2-1}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/2-3}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/2-4}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/4-1}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/4-2}
-	\includegraphics[height=0.10\textheight]{images/2015_1_caip/4-3}
-	\caption{\label{fig:exs2} (Top) From left to right: training original image from ALL-IDB2, manually segmented nucleus and cytoplasm; test original image, segmentation result for nucleus an cytoplasm with the first strategy. (Bottom) From left to right: test original image, segmentation result for nucleus an cytoplasm with the second strategy; test original image, segmentation result for nucleus an cytoplasm with the third strategy.}
-\end{figure}
-
+The \textbf{second strategy} basically works like the first one, with a main difference. We have excluded, indeed, from the training samples all the pixels belonging to the cytoplasm, in order to avoid misclassification due to similarities with the lighter region of erythrocytes. 
+The \textbf{third strategy} is based on the results obtained with the two previous version. In fact the classifier needs more valid training samples for cytoplasm only. So, in this version we performed a three-class SVM, using both the pixels belonging from WBCs nuclei (class 1) and both pixels belonging to the WBCs cytoplasm (class 2). Thus, pixels belonging to erythrocytes or background are labelled with class 3. 
 It is well know that getting manually segmented images is neither simple nor cheap. Considering that, we perform an experiment which can be be applied to every peripheral blood images dataset, even in each illumination condition and with different combinations  of cameras and microscopes. 
 Our propose is based on ROI (Region of Interest) selection. Thus, making use of few original images the object of interest (WBCs) could be selected and used as positive example for our multiple classifier. Considering that we are talking of a segmentation method based on classifiers also negative instances are needed, so the background region, that comprises red blood cells and plasma, must be selected. An example of ROI selection for positive and negative example is showed in Fig.~\ref{fig:ex6}.
 
@@ -1714,15 +1701,17 @@ To solve this problem we used a path analyser that checks for the presence of op
 At this moment, every pure edge belonging to the cells is available but over-segmentation could occur so that we need to perform an arithmetical operation which fills all the WBCs edges and removes the others. This operation uses a mask obtained from the external force image.
 Finally, the application of an opening on the edge map with a 6 pixels radius disk structural element and its addition to WBCs image in foreground, all connected components, fitting into a specific area range, are successfully extracted, as shown in fig. \ref{fig:vfc1}. 
 
-\begin{figure}[!t]
+
+\begin{figure}[h]
 	\centering
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/015_1}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/figure2}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/figure3}
-	\includegraphics[height=0.2\textwidth, width=0.31\textwidth]{images/2018_1_visapp/figure4}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/figure5}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/figure7}
-	\caption{\label{fig:vfc1}Example of VFC segmentation procedure. Top, from left to right: original image, VFC right and left component and distance transform image. Bottom, from left to right: external energy image, overlay image and opened image.}
+	\hspace{-1.5mm}\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/015_1}\vspace{1 mm}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure2}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure3}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure3}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure4}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure5}
+	\includegraphics[width=0.24\textwidth]{images/2018_1_visapp/figure7}
+	\caption{\label{fig:vfc1}Example of VFC segmentation procedure. Top, from left to right: original image, VFC right component, VFC left component, distance transform image. Bottom, from left to right: external energy image, overlay image and opened image.}
 \end{figure}
 
 \section{Discussion}\label{sec:Discussion}
@@ -1759,15 +1748,17 @@ The segmentation via SVM produces a labelled image, with a different label for e
 Each connected component just extracted is firstly compared in size and shape with the reference value that we extracted from the training samples. Such reference values are the \textit{solidity} (\ref{solidity}), determined from the average solidity of all the leukocyte in the training samples, and the area determined from the biggest leukocyte in the training samples. The area value is used to distinguish all the irregular cells sizes caused by the presence of cells agglomerates. The solidity value, on the other hand, is used to discriminate the abnormal components, with an irregular boundary or containing holes but even to exclude dye artefacts, while the $convex\_area$ is the area of the object's convex hull. Since it is already possible to operate only on cells agglomerate, the use of the whole image is no more necessary. Therefore, we perform a crop of the original image for each region containing the agglomerates, using the previously computed bounding box. At this point, we know the position of the agglomerates but, also, the exact regions to work on, thus we can use again the segmentation result to delete all regions within the sub-images that definitely are not leukocytes. 
 To entirely preserve the leukocytes edges the binary image containing the segmentation result has been enhanced by a morphological closing operation, excluding small holes inside the regions but also enhancing the cells contour. In this way, the resulting image is very clean, presenting only the leukocyte agglomerate on a dark background. Since our ultimate goal is to provide a cell count, rather than a real separation of cells, in this case, we have preferred to speed up the process by realising a pure detection phase based on the knowledge extracted from the cells forming the training set. 
 The detection has been performed with the circular Hough Transform, being the most suitable for the recognition of circular shape, in particular if the range of the radii values is already known, as in our case. Obviously, if the range of the possible radii is small, the detection will be faster, but we are more interested on detecting all the leukocytes, thus the radii of the smallest leukocyte, decreased of a factor of 0.9, has been chosen as minimum radius value. On the other hand, the radii of the biggest leukocyte has been chosen as maximum radius value increased of 1.1 factor. Both values have been taken from the training samples. The algorithm of the circular Hough transform is based on the gradient field of the image, that performs a threshold in a measure of the 5\% of the maximum intensity value, so ignoring all the pixels with gradient magnitudes smaller than the threshold. Thanks to it, false detection, due to the presence of small values of the gradient magnitude, is avoided. A qualitative evaluation of the whole step of separation and counting is shown in Fig.~\ref{fig:ex9}.  As it can be seen the detection phase is excellent, also with the presence of agglomerates with an high number of cells. The counting now becomes easy, because it is only necessary to count the detected circles in each sub-image plus the single leukocytes detected in the previous phase.
-\begin{figure}[!t]
+
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.49\textwidth]{images/2016_1_mva/DetectedIm001_1}
-	\includegraphics[width=0.49\textwidth]{images/2016_1_mva/DetectedIm001_1small}
-	\includegraphics[width=0.49\textwidth]{images/2016_1_mva/DetectedIm001_1solid}
-	\includegraphics[width=0.236\textwidth]{images/2016_1_mva/agglomerateclosed}
-	\includegraphics[width=0.236\textwidth]{images/2016_1_mva/agglomeratehough}
+	\includegraphics[width=7cm]{images/2016_1_mva/DetectedIm001_1}
+	\includegraphics[width=7cm]{images/2016_1_mva/DetectedIm001_1small}
+	\includegraphics[width=7cm]{images/2016_1_mva/DetectedIm001_1solid}
+	\includegraphics[width=3.36cm]{images/2016_1_mva/agglomerateclosed}
+	\includegraphics[width=3.36cm]{images/2016_1_mva/agglomeratehough}
 	\caption{\label{fig:ex9}Leukocyte detection phases: connected components, single objects detection, artefact removal, agglomerates crop and detected leukocytes.}
 \end{figure}
+
 To further highlight the importance of each phase of the proposed method, we show in Fig.~\ref{fig:ex10} how the Hough transform performs on some original blood sample images, without the use of any regions crop and in particular, in the first case without any knowledge about the size of the leukocytes and in the second case without any knowledge about the grey levels. In both cases the results are really unsatisfactory, since many little circles have been drawn over bigger leukocytes or worst many circles have been drawn on areas that do not contain any leukocyte. 
 \begin{figure}[!t]
 	\centering
@@ -1821,14 +1812,14 @@ In this chapter the segmentation, separation and counting of white blood cells t
 The first method, called "Det 1" from now on, achieves an average accuracy of $97.61\%$ that in many cases reaches the $99\%$, outperforming the state-of-the-art methods, such as the method proposed in \cite{Mahmood} that uses the circular Hough transform without any restriction on the area of interest, obtained an average accuracy of 81\%, with an high number of false positives, or the method proposed in \cite{Alilou}, based on a rectangular detection using Gray Level Co-occurrence Matrix, that achieved a 88\% of accuracy with a high number of false positives. It is important to note that this method does not produce any false positive, being able to exclude all the other image regions since it is based on a previous phase of segmentation. 
 This method is evaluated differently: since we do not have manually segmented images for all the tested datasets, we report the ROC curves to show the SVM performances of the new method (see Fig.~\ref{fig:dataset}). As it can be seen, the AUC value is almost always well above the 90\% , except in one case. This value is observed just for the images belonging to the IUMS-IDB dataset, which has significant visual defects that impair the SVM prediction capabilities and, as a consequence, the quality of segmentation is affected by such defects.
 
-\begin{figure*}[!htbp]
+\begin{figure*}[h]
 	\centering
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/015_1.png}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/064.jpg}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/037.jpg}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/015_1seg.png}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/064seg.jpg}
-	\includegraphics[height=0.2\textwidth, width=0.3\textwidth]{images/2018_1_visapp/037seg.jpg}
+	\hspace{-1.4mm}\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/015_1.png}
+	\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/064.jpg}
+	\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/037.jpg}
+	\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/015_1seg.png}
+	\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/064seg.jpg}
+	\includegraphics[width=0.3\textwidth]{images/2018_1_visapp/037seg.jpg}
 	\caption{Top: from left to right, images extracted from ALL-IDB, IUSMS-IDB and SMC-IDDB, respectively. Bottom: from left to right, the final segmentation results for each image on top.}
 	\label{segmentationThreeDB}
 \end{figure*}
@@ -1931,7 +1922,7 @@ It is evident that this approach correctly identifies 100\% of the leukocytes in
 The main purpose of this thesis was to develop a CAD system able to extract appropriate and useful information from blood cell images, In particular, we aimed to realize a dataset-independent framework for cells analysis, a precise scheme of cells labelling and counting and a complete cells classification for diagnostic tasks. All considered, a part of the work of this thesis has been the extension of the system described in the two previous chapters in order to make a deep analysis of both WBC and RBC.
 RBCs or erythrocytes are uniform in size, 7-8 $\mu$m in diameter. They are round and flattened like a donut, due to the presence of haemoglobin that is located peripherally, leaving an area of central pallor equal to 1-3 $\mu$m, approximately 30-45\% of the diameter of the cells. While not every RBC will be perfect, any significant number of cells that are different in shape or size may indicate the presence of disease \cite{Erhabor}. Identifying normal and abnormal erythrocytes is really important, since automated cell counters have not yet replaced the well-trained eye with respect to the subtleties of red blood cell morphology. Erythrocyte colour is representative of haemoglobin concentration in the cell, while an abnormal shape may indicate possible presence of a specific disease or disorder. Some examples of shape and colour abnormalities are shown in Fig.~\ref{fig:RBCs}. The cytoplasm of all normal RBCs is free of debris, granules, or other structures. Inclusions are the result of distinctive conditions and their identification can be clinically helpful. Some examples of inclusion bodies are shown in Fig.~\ref{fig:RBCs}.
 
-\begin{figure*}[!htbp]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/spherocyte}\vspace{1mm}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Ovalocyte}
@@ -1939,21 +1930,20 @@ RBCs or erythrocytes are uniform in size, 7-8 $\mu$m in diameter. They are round
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/sickle}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Acanthocyte}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Echinocyte}
-	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/keratocyte}
+	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/keratocyte}\vspace{1mm}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/bite}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Stomatocyte}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Target}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/schistocyte}
-	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/reulex}\\
+	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/reulex}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Howell}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/siderotic}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/basophilic}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Heinz}
 	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/Malaria}
-	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/nucleated}
-	\caption{\label{fig:RBCs} (From top left to bottom right) Shape and colour abnormalities: spherocyte, elliptocyte, tear, sickle, acanthocyte, echinocyte, keratocyte, byte, stomatocyte, target, schistocyte and rouleaux formation.
-		(Bottom) Inlusions: howell-jolly bodies, siderotic granules, basophilic stippling, Heinz bodies, malaria and nucleated RBC.}
-\end{figure*}
+	\includegraphics[width=0.14\textwidth]{images/2016_2_sitis/nucleated}\hspace{-1mm}
+	\caption{\label{fig:RBCs} (Top) From left to right: training original image from ALL-IDB2, manually segmented nucleus and cytoplasm; test original image, segmentation result for nucleus an cytoplasm with the first strategy. (Bottom) From left to right: test original image, segmentation result for nucleus an cytoplasm with the second strategy; test original image, segmentation result for nucleus an cytoplasm with the third strategy}
+\end{figure}
 
 The proposed method starts with a segmentation phase, like the methods proposed in \ref{iciap2015}, \ref{caip2015}. Since the accuracy of the whole analysis process depends on the accuracy of the segmentation procedure, we performed a segmentation based on a machine learning approach, as proposed in \cite{DiRuberto2016}, in order to extend the segmentation procedure to all datasets. As for all the approaches involving machine learning techniques, training samples are needed in order to create a model or to make a comparison with the unknown samples. The WBCs, RBCs and plasma regions are selected from some sample images by performing a manual crop over them in order to obtain the respective Region Of Interest (ROIs) as shown in Fig.~\ref{fig:ex6}. The pixels values from R, G and B channels are extracted from the three different ROIs. The obtained pixels are examined with the purpose of avoiding sampling errors and reduced in cardinality by using a Nearest Neighbour Search (NNS) with Euclidean distance. The NNS is applied on pixels belonging to the same region to remove duplicates or close values, therefore pixels with distance $ \cong 0$, and outliers or noisy pixels, thus pixels with distance $ \gg \mu$. Then the NNS is performed over the pixels belonging to different classes, so that the intersection among the three classes is empty. Thus the NNS is used to create a smaller but more representative training set. This training set is used to create a multi-class model able to correctly segment the blood components of new images. The model has been obtained by training a Support Vector Machine using a one-vs-rest approach. The kernel used to train the model is the Radial Basis Function, also known as RBF. It uses two parameters: the value of the box constraint $c$ and the value of gamma $\gamma$ that defines the width of the bell-shaped curve. After a cross-validation procedure we identified the best parameter values that are equal to $1e3$ and $1e1$ for $c$ and $\gamma$, respectively. A kernel approach has been preferred over a linear separation among the classes, because it is able to take into account the brightness reductions and the uncertainty present in the images. The results of this approach applied on a new image is a labelled image with different labels for WBCs, RBCs and plasma, as shown in Fig.~\ref{fig:ex6}. 
 The just obtained labelled image can be used as a mask over the original image in order to separately analyse each image component. Actually, many cells can be extracted directly from the binary mask but, as previously said, there are many agglomerates of cells that cannot be ignored. During the analysis, all the cells with a size comparable to the ones present in the training set, are recognised as single cells and directly counted. The remaining components, recognised as agglomerates of cells, are submitted to a further step based on circular Hough transform. This step takes advantages of the previous segmentation phase. Indeed, the detection step is performed on the original grey level images as follows. Firstly, the original image is masked with the segmented one and then every cells agglomerate is separately analysed. Using the knowledge acquired from the training set we are able to set the correct parameters for the circular Hough transform, that in this way searches only for the circular objects with the appropriate grey level values. Finally, the cells count can be easily completed by adding the number of circles detected in this step to the single cells count value previously computed. More details about the proposed method for segmentation and cells count can be found in \cite{DiRuberto2016}.
@@ -1985,13 +1975,17 @@ To train our segmentation approach based on machine learning we have used the im
 During the experimentations the proposed approach correctly identified 99.2\% of the whole leukocytes and the 98\% of erythrocytes, showing also a very low FNR value, being able to neglect just few cells present in the images. It is also important to note that the proposed approach produces a low number of RBCs false positives and even less WBCs false positives (0\%), being able to exclude all the other image regions before the detection phase by considering only portions of image containing the currently analysed cells. Through a numerical comparison it is possible to observe that our method outperforms the detection methods existing in literature. In particular, the method proposed in \cite{Alilou}, based on a rectangular detection for WBCs only, using Gray Level Co-occurrence Matrix, achieved a 88\% of accuracy with a significant amount of false positives. The method proposed in \cite{Mahmood} uses the circular Hough transform, like our does, but it has been applied on different colour spaces without any restriction on the area of interest. This method indeed produced an overall accuracy of 81\% for WBCs and 64\% for RBCs. Also in \cite{Alomari} the circular Hough transform has been used, but in that case the number of candidate circles have been reduced by selecting the one with the higher probability. This operation reduced the number of false positives but also increased the number of true positives, reaching an overall accuracy of 98.4\%. It was also, at the best of our knowledges, the method that obtained the best performances applied to the ALL-IDB dataset. 
 
 \section{MP-IDB: Malaria Parasite Dataset}
+Malaria is an epidemic health disease and a rapid, accurate diagnosis is necessary for proper intervention. Generally, pathologists visually examine blood stained slides for malaria diagnosis. 
+Nevertheless this kind of visual inspection is subjective, error-prone and time consuming. In order to overcome the issues numerous methods of automatic malaria diagnosis have been proposed so far. In particular, many researchers have used mathematical morphology as a powerful tool for computer aided malaria detection and classification.
+Microscopic image analysis and particularly malaria detection and classification can greatly benefit from the use of computer-aided algorithms. For these reasons, a new public dataset has been realized by acquiring images of malaria affected blood smears.
 Dataset images have been acquired with a Leica DM2000 optical laboratory microscope at Centre Hospitalier Universitaire Vaudois (CHUV) coupled with a built-in camera and software. The entire procedure has been realized under the supervision of expert radiologists, headed by Dr. Guy Prod'Hom. Every image is stored in PNG format with a $2592\times1944$ resolution and 24 bit colour depth. The images are taken with the same magnification of the microscope: $100\times$.
 This dataset is composed of 229 images, representing four different kinds of malaria parasite. Plasmodium Falciparum is present in 122 images, Malariae in 37, Ovale in 29 and Vivax in 46. Each image contains, at least, one parasite. Our dataset can be used either for testing segmentation capability of algorithms or classification system methods. 
 It contains about 48000 blood cells, in which malaria parasites have been labelled by expert radiologists. The number of candidate parasites present in the MP-IDB is equal to 840. Specific counting, per parasite type and stage of life, is shown in table \ref{table1}.
 The annotation of the dataset images is described as follows. The image filenames are named with the following notation: "ImXXXPR.png", in which "XXX" identifies a 3-digit integer counter, P represents one of the four parasite species ('F' for P.Falciparum, 'M' for P.Malariae, 'O' for P.Ovale, 'V' for P.Vivax), while the final R stands for the life stage ('R' for ring, 'S' for schizont, 'T' for trophozoite and 'G' for gametocyte stage). Every single image file has a reference text file with the filename notation set to "ImXXXC.xyc", which reports the coordinates of the parasites centroids. In particular, they have manually been estimated by a skilled radiologist at CHUV. 
 These dataset images have been acquired with the same microscope. Unfortunately, lots of them suffer from different issues, like a typical non-uniform background illuminations and overexposed borders, due to the illumination of the microscope lamp (visible in fig. \ref{f1_img_types}). It causes also that the regions of interest can have different colouration, also due to the age of the analysed smears. It justifies a strong pre-processing step to make the image conditions the most similar possible, in order to realize an automated procedure. In fact, even though the images still remain intelligible, classic segmentation methods, e.g. based on thresholding, can suffer of these issues.
+The main targets related to the creation of this dataset are to show how malaria parasite analysis is currently performed and which are the principal issues to deal with. Moreover, we have proposed a public dataset of blood samples, specifically designed to evaluate and compare the performances in segmentation or classification of malaria parasites by computer vision techniques. Our aim in realizing MP-IDB is to offer a strong image processing dataset, specifically designed to help in encourage new stud- ies about malaria image analysis under a fair comparative approach based on a common dataset, like what ALL-IDB \cite{Donida} has offered for leukaemia detection and white blood cells analysis \cite{DiRuberto2016}. 
 
-\begin{table}[!h]
+\begin{table*}[t]
 	\caption{Composition of dataset's images}\label{table1}
 	\centering
 	\setlength\tabcolsep{0.2cm}
@@ -2018,7 +2012,7 @@ These dataset images have been acquired with the same microscope. Unfortunately,
 		& Schizont & 10 \\
 		& Gametocyte & 11 \\ \hline
 	\end{tabular}
-\end{table}
+\end{table*}
 
 \part{Conclusions} 
 \chapter*{Conclusions} \label{tre}
