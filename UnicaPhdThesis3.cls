@@ -433,7 +433,8 @@ should be used in mainmatter mode}
 \providecommand*\prefacename{Prefazione}
 \providecommand*\refereename{Controrelatore}
 \providecommand*\summaryname{Riassunto}
-\providecommand*\supervisorname{Relatore}
+\providecommand*\supervisorname{Relatore1}
+\providecommand*\supervisorname{Relatore2}
 \providecommand*\phdcoordinatorname{Coordinatore Dottorato}
 \providecommand*\ssdname{S.S.D.}
 \providecommand*\cyclename{Ciclo}
