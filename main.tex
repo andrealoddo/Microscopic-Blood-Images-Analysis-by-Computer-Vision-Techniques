@@ -386,11 +386,45 @@ class = abbrev
 \begin{document}
 
 \maketitle
+\clearpage\mbox{}\clearpage
+
+\begin{flushright}
+	\null\vspace{\stretch{1}}
+	\textit{"I resist what I cannot change."}
+	\vspace{\stretch{3}}\null
+
+\end{flushright}
+
+\noindent
+I want to state a particular thank to prof. Cecilia Di Ruberto, prof. Michel Kocher, and Lorenzo, who have always supported me in the realization of this work.
+
+\noindent
+I dedicate my thesis to my parents. Because without whom it would never have been started. 
+
+\noindent
+To my love, friends, relatives, anyone who has taught me something. Because without whom it would never have been finished.
+
+\noindent
+To Salvatore and Rosalba.
+Because you are always on my mind. \newline
+
+\noindent
+Voglio esprimere un ringraziamento particolare alla Prof.ssa Cecilia Di Ruberto, al prof. Michel Kocher e a Lorenzo, per avermi sempre supportato nella realizzazione di questo lavoro.
+
+\noindent
+Dedico la mia tesi ai miei genitori. Perch\'{e} senza di loro non sarebbe mai iniziato.
+
+\noindent
+Al mio amore, amici, parenti, chiunque mi abbia insegnato qualcosa. Perch\'{e} senza di loro non sarebbe mai finito.
+
+\noindent
+A Salvatore e Rosalba. Perch\'{e} siete sempre nella mia mente.
+
 
 \begin{abstract}
 Automatic analysis and information extraction from an image is still a highly challenging research problem in the computer vision area, attempting to describe the image content with computational and mathematical techniques. Moreover, the information extracted from the image should be meaningful and as most discriminatory as possible, since it will be used to categorize its content according to the analyzed problem. In the Medical Imaging domain, many important decisions that affect patient care depends on the usefulness of the information extracted from the image. Managing medical image is even more complicated not only due to the importance of the problem but also because it needs a fair amount of prior medical knowledge to be able to represent with data the visual information to which pathologist refer. 
 
-Today medical decisions that impact patient care rely on the results of laboratory tests to a greater extent than ever before, due to the marked expansion in the number and complexity of offered tests. These developments promise to improve the care of patients, but the more increase the number and complexity of the tests, the more improvements the possibility to misapply and misinterpret the test themselves, leading to inappropriate diagnosis and therapies.  Moreover, pathologists devote much time to the analysis of the tests rather than to the patients care and to the prescription of the right treatment, because of the increased number of tests and amount of data to analyse. Sometimes it can be a waste of time, considering that most of the tests performed are only check-up tests, and most of the analyzed samples come from healthy patients.
+Today medical decisions that impact patient care rely on the results of laboratory tests to a greater extent than ever before, due to the marked expansion in the number and complexity of offered tests. These developments promise to improve the care of patients, but the more increase the number and complexity of the tests, the more improvements the possibility to misapply and misinterpret the test themselves, leading to inappropriate diagnosis and therapies.  Moreover, pathologists devote much time to the analysis of the tests rather than to the patients care and to the prescription of the right treatment, because of the increased number of tests and amount of data to analyze. Sometimes it can be a waste of time, considering that most of the tests performed are only check-up tests, and most of the analyzed samples come from healthy patients.
 
 Then, a quantitative evaluation of medical images is essential to overcome uncertainty and subjectivity, but also to reduce the amount of data and the timing of the analysis significantly. In the last few years, many computer-assisted diagnosis systems have been developed, attempting to mimic pathologists by extracting features from the images. Image analysis involves complex algorithms to identify and characterize cells or tissues using image pattern recognition technology. This thesis addresses the main problems associated to the digital microscopy analysis in hematology diagnosis, with the development of algorithms both for the extraction of useful information from different digital images and for the distinction of various biological structures. The proposed methods aim to improve the degree of accuracy of the analysis and to reduce the diagnosis time. Furthermore, they can be used as standard tools for skimming the number of samples to be analyzed directly from the pathologist, or as double check systems to verify the correct results of the automated facilities used today.
 \end{abstract}
@@ -455,6 +489,7 @@ In general, it is possible that some CAD systems do not need to use all the ment
 The following chapters give an overview of the most used techniques in the different phases of a typical CAD system and the basic concepts applied to the proposed methods for peripheral blood image analysis, described in part \ref{due} will be depicted.
 
 \chapter{Image Pre-processing}
+\label{preproc}
 Pre-processing is a common name for operations with images at the lowest level of abstraction.
 The primary purpose is an improvement of the image condition by means of some operations in order to suppress unwanted distortions, such as noise or artifacts, or enhance some image features for further processing like, for example, enhancing or stretching the contrast, separating, in a better way, the objects of interest from the background.
 It is worth to indicate that pre-processing methods may be unnecessary on CAD systems for several reasons: first of all, image acquisition tools, like modern microscopes, are equipped with high-level cameras, and they can produce excellent quality images. Secondarily, this kind of operations could alter a lot, or even suppress, the structures of the cells which are essential for further analysis phases. Typically, images structures are represented with an appropriate definition with only a small quantization noise, or they can directly be acquired in a low contrast environment. For these reasons the most used pre-processing operations are:
@@ -625,8 +660,7 @@ Furthermore, the separation of the luminance component from color information is
 \end{split}
 \end{equation}
 
-\begin{figure}[!h]
-	\centering
+\begin{figure}[ht]
 	\includegraphics[width=0.3\textwidth]{images/figcs_rgb}
 	\includegraphics[width=0.3\textwidth]{images/figcs_hsv}
 	\includegraphics[width=0.3\textwidth]{images/figcs_hsl}
@@ -864,7 +898,8 @@ The traditional machine vision and image processing approaches assume the presen
 \subsubsection{Gray Level Co-occurrence Matrix} \label{GLCM}
 One of the most powerful model for texture analysis was proposed by Haralick \cite{Haralick}. His method involves the creation of the Gray Level Co-occurrence Matrices (\acs{GLCM}s) from which features that represent some image aspects can be calculated. A GLCM represents the probability of finding two pixels \textit{i} and \textit{j} with distance \textit{d} and orientation $\theta$ and it is denoted with $p_{d,\theta}(i,j)$. Obviously, the \textit{d} and $\theta$ values can assume different values, but the most used are $d = 1$ and $\theta = [0 ^\circ, 45 ^\circ, 90 ^\circ, 135 ^\circ]$. A GLCM for an image of size $N \times M$ with $N_{g}$ grey levels is a 2D array of size $N_{g} \times N_{g}$. Haralick proposed thirteen descriptors that can be extracted from these matrices. 
 
-\noindent\textit{Angular Second Moment}: is the squares sum of the matrix values (\ref{asm}). It is also known as Uniformity. This feature has a range between 0 and 1. The value is 0 if the image is constant.\\
+\noindent\textit{Angular Second Moment}: is the squares sum of the matrix values (\ref{asm}). It is also known as Uniformity. This feature has a range between 0 and 1. The value is 0 if the image is constant.
+
 \begin{equation}\label{asm}
 \acs{ASM}=\sum_{i=0}^{N_{g}-1}\sum_{j=0}^{N_{g}-1}p(i,j)^2
 \end{equation}
@@ -999,8 +1034,7 @@ To these descriptors extracted from GLCMs many others have been proposed, but on
 Some interesting methods have also been presented to extend the original implementation of GLCM, computing the matrices by evaluating different distance parameters \cite{Gelz}, different windows sizes \cite{HuY}, different color channels \cite{Benco}, adding the color gradient \cite{Gong} or also considering the edge orientation \cite{Mitrea}. Furthermore, the GLCM descriptors can be extracted after computing a weighted sum of GLCM elements \cite{Walker} or after calculating the local gradient of the matrix \cite{Chen}. 
 
 \subsubsection{Gray Level Difference Matrix} \label{GLDM}
-Another useful tool for texture analysis is the grey level difference matrix (\acs{GLDM})\cite{Conners}, that is a particular type of matrix originated by the absolute differences between grey levels pairs. Actually, the GLDM is defined in very similar way to the GLCM, using the same notions of distance and orientation to find grey levels pairs. The main difference arises in the construction and dimension of the matrix. In fact, the GLDM preserves the size of the original image (and not $N_{g} \times N_{g}$), collecting the absolute difference between pairs of pixel values (and not the occurrences of two grey levels). This matrix is used to calculate the histogram $h(d)$ that denotes the number of differences with value $d$. The histogram is then normalized $h_N(d)=h(d)/N $ with $N = \sum_{d} h(d)$ in order to easily compute nine descriptors
-that are \textit{mean} (\ref {meanGLDM}), \textit{angular second moment} (\ref{asmGLDM}), \textit{contrast} (\ref{contrastGLDM}), \textit{variance} (\ref{varianceGLDM}), \textit{inverse difference moment} (\ref{IDMGLDM}),  \textit{entropy} (\ref {entropyGLDM}), \textit{product moment} (\ref {PMGLDM}), \textit{cluster shade} (\ref{CSGLDM}) and \textit{cluster prominence} (\ref {CPGLDM}). 
+Another useful tool for texture analysis is the grey level difference matrix (\acs{GLDM})\cite{Conners}, that is a particular type of matrix originated by the absolute differences between grey levels pairs. Actually, the GLDM is defined in very similar way to the GLCM, using the same notions of distance and orientation to find grey levels pairs. The main difference arises in the construction and dimension of the matrix. In fact, the GLDM preserves the size of the original image (and not $N_{g} \times N_{g}$), collecting the absolute difference between pairs of pixel values (and not the occurrences of two grey levels). This matrix is used to calculate the histogram $h(d)$ that denotes the number of differences with value $d$. The histogram is then normalized $h_N(d)=h(d)/N $ with $N = \sum_{d} h(d)$ in order to easily compute nine descriptors that are \textit{mean} (\ref {meanGLDM}), \textit{angular second moment} (\ref{asmGLDM}), \textit{contrast} (\ref{contrastGLDM}), \textit{variance} (\ref{varianceGLDM}), \textit{inverse difference moment} (\ref{IDMGLDM}),  \textit{entropy} (\ref {entropyGLDM}), \textit{product moment} (\ref {PMGLDM}), \textit{cluster shade} (\ref{CSGLDM}) and \textit{cluster prominence} (\ref {CPGLDM}). 
 
 \noindent\textit{Mean}:
 \begin{equation}\label{meanGLDM}
@@ -1127,6 +1161,8 @@ Once the features have been extracted from cells, they must be inserted in a pro
 	\item Neural Network
 	\item Support Vector Machine
 \end{itemize}
+Moreover, machine learning methods are generally divided into {\it supervised} and {\it unsupervised learning} algorithms, although there are many nuances. In supervised learning, a model is presented with a dataset $\mathcal{D} = \{{\bf x}, y\}^{N}_{n = 1}$ of input features ${\bf x}$ and label $y$ pairs, where $y$ typically represents an instance of a fixed set of classes. In the case of regression tasks $y$ can also be a vector with continuous values. Supervised training typically amounts to finding model parameters $\Theta$ that best predict the data based on a loss function $L(y, \hat{y})$. Here $\hat{y}$ denotes the output of the model obtained by feeding a data point ${\bf x}$ to the function $f({\bf x}; \Theta)$ that represents the model.
+Unsupervised learning algorithms process data without labels and are trained to find patterns, such as latent subspaces. Examples of traditional unsupervised learning algorithms are principal component analysis and clustering methods. Unsupervised training can be performed under many different loss functions. One example is reconstruction loss $L({\bf x}, \hat{{\bf x}})$ where the model has to learn to reconstruct its input, often through a lower-dimensional or noisy representation.
 
 \section{Nearest Neighbor} \label{kNN}
 The Nearest Neighbour classifier uses the concept of proximity to classify a new record, based on the samples provided by the training set that are similar to it. Each instance of the training set is a point in an n-dimensional space, where $n$ is the number of features. When NN has to classify a new record, it calculates its distance from each training set sample. Then, the $k$ examples of the training set closer to the new record, called k-Nearest Neighbors (k\acs{NN})  \cite{Cover}, are identified and used to assign the class label prevailing among kNN to the new record. However, there may be problems in the choice of $k$, in fact, if this value is too small, there is a high sensitivity to noise, but if it is too large, there may be examples not similar enough to the record to be classified, among the kNN. One way to reduce the influence of the parameter $k$ is to calculate the prevailing class by assigning a different weight to each of the first neighbors according to its distance from the record to be classified. This type of classifier is the simplest among those listed, as it does not require the induction of a model from the training set, which is used in the classification step to compare the new records with the known ones. In contrast to the saved resources for the construction of the model, the classification of a new record, however, is rather expensive. Indeed, the proximity between the new record and the known examples of the training set must be calculated every time.
@@ -1150,6 +1186,70 @@ The one-vs-all approach, also known as one-vs-rest, is the first and the most in
 \subsection{One-vs-one SVM}
 The one-vs-one approach is another commonly used SVM strategy but, differently from the one-vs-all approach, for a multi-class problem having $m$ classes, it consists on training $\frac{m(m-1)}{2}$ different binary SVM classifiers, where each one of them separates a class from another one. In this case, combining the results from individual binary SVM classifiers becomes more complex. The simplest way to obtain the predicted class label is to use the majority voting, counting the votes given by each binary classifier and assigning the class label that has the highest number of votes. However, the voting process could produce ambiguous results (e.g., tie cases).
 For this reason, a common practice is to use the majority voting strategy combined with the maximum separation strategy, assigning the class label $i$, if the result of the binary classifier produces the highest number of $i$ votes with the maximum separation between $i$ class and each of the other classes. Another common practice consists in arranging all the $\frac{m(m-1)}{2}$ binary SVM classifiers in a Directed Acyclic Graph (\acs{DAG}) structure with the same number of nodes. The test phase starts at the root node and continues until a leaf node, representing the predicted class label, is reached. Thus, only $m-1$ comparisons are needed, completely avoiding tie cases, but the problem is encountered just during the construction of the DAG. , in this case, there are several ways to construct the DAG structure, and each one of them may produce different classification results and when the number of classes is high, testing all possible orders is impossible.
+
+\section{Deep learning methods}
+\label{sec:neuralnets}
+
+\subsection{Neural Networks}
+Neural networks are a type of learning algorithm which forms the basis of most deep learning methods. A neural network comprises of neurons or units with some activation $a$ and parameters $\Theta = \{\mathcal{W}, \mathcal{B}\}$, where $\mathcal{W}$ is a set of weights and $\mathcal{B}$ a set of biases. The activation represents a linear combination of the input ${\bf x}$ to the neuron and the parameters, followed by an element-wise non-linearity $\sigma(\cdot)$, referred to as a transfer function: 
+\begin{equation}
+a = \sigma({\bf w}^{T}{\bf x} + b).
+\end{equation}
+Typical transfer functions for traditional neural networks are the sigmoid and hyperbolic tangent function.  The multi-layered perceptrons (MLP), the most well-known of the traditional neural networks, have several layers of these transformations:
+\begin{equation}
+f({\bf x}; \Theta) = \sigma( {\bf W}^{T}\sigma({\bf W}^{T} \ldots \sigma({\bf W}^{T} {\bf x} + b)  ) + b).
+\end{equation}
+Here, ${\bf W}$ is a matrix comprising of columns ${\bf w}_{k}$, associated with activation $k$ in the output. Layers in between the input and output are often referred to as 'hidden' layers. When a neural network contains multiple hidden layers it is typically considered a 'deep' neural network, hence the term 'deep learning'.
+
+At the final layer of the network the activations are mapped to a distribution over classes $P(y | {\bf x}; \Theta)$ through a {\it softmax} function:
+\begin{equation}
+P(y | {\bf x}; \Theta) = \text{softmax}({\bf x}; \Theta) = \frac{e^{{\bf w}_{i}^{T}{\bf x} + b_{i}}}{\sum^{K}_{k = 1} e^{{\bf w}_{k}^{T}{\bf x} + b_{k}}},
+\end{equation}
+where ${\bf w}_{i}$ indicates the weight vector leading to the output node associated with class $i$. 
+
+Maximum likelihood with stochastic gradient descent is currently the most popular method to fit parameters $\Theta$ to a dataset $\mathcal{D}$. In stochastic gradient descent a small subset of the data, a mini-batch, is used for each gradient update instead of the full data set. Optimizing maximum likelihood in practice amounts to minimizing the negative log-likelihood:
+\begin{equation}
+\arg \min_{\Theta} - \sum^{N}_{n = 1} \log\big[ P(y_{n}| {\bf x}_{n}; \Theta) \big].
+\end{equation}
+This results in the binary cross-entropy loss for two-class problems and the categorical cross-entropy for multi-class tasks. A downside of this approach is that it typically does not optimize the quantity we are interested in directly, such as area under the receiver-operating characteristic (ROC) curve or common evaluation measures for segmentation, such as the Dice coefficient. 
+
+Currently, the most popular models are trained end-to-end in a supervised fashion, greatly simplifying the training process. The most popular architectures are convolutional neural networks (CNNs) and recurrent neural networks (RNNs). CNNs are currently most widely used in (medical) image analysis, although RNNs are gaining popularity. 
+
+\subsection{Convolutional Neural Networks (CNNs)}
+There are two key differences between MLPs and CNNs. First, in CNNs weights in the network are shared in such a way that it the network performs convolution operations on images. This way, the model does not need to learn separate detectors for the same object occurring at different positions in an image, making the network equivariant with respect to translations of the input. It also drastically reduces the amount of parameters (i.e.\ the number of weights no longer depends on the size of the input image) that need to be learned. 
+
+At each layer, the input image is convolved with a set of $K$ kernels  $\mathcal{W} = \{ {\bf W}_{1}, {\bf W}_{2}, \ldots, {\bf W}_{K} \} $ and added biases $\mathcal{B} = \{b_{1}, \ldots, b_{K}\}$, each generating a new feature map ${\bf X}_{k}$. These features are subjected to an element-wise non-linear transform $\sigma(\cdot)$ and the same process is repeated for every convolutional layer $l$:
+\begin{equation}
+\label{eq::mapping_cnn}
+{\bf X}_{k}^{l} = \sigma\big( {\bf W}_{k}^{l -1} \ast {\bf X}^{l -1} + b_{k}^{l-1} \big).
+\end{equation}
+
+The second key difference between CNNs and MLPs, is the typical incorporation of pooling layers in CNNs, where pixel values of neighborhoods are aggregated using a permutation invariant function, typically the max or mean operation. This induces a certain amount of translation invariance and again reduces the amount of parameters in the network. At the end of the convolutional stream of the network, fully-connected layers (i.e.\ regular neural network layers) are usually added, where weights are no longer shared. Similar to MLPs, a distribution over classes is generated by feeding the activations in the final layer through a softmax function and the network is trained using maximum likelihood. 
+
+\subsection{Deep CNN Architectures}
+Given the prevalence of CNNs in medical image analysis, we elaborate on the most common architectures and architectural differences among the widely used models. 
+
+\subsubsection{General classification architectures}
+LeNet \cite{Lecu98} and AlexNet \cite{Kriz12}, introduced over a decade later, were in essence very similar models. Both networks were relatively shallow, consisting of two and five convolutional layers, respectively, and employed kernels with large receptive fields in layers close to the input and smaller kernels closer to the output. AlexNet did incorporate rectified linear units instead of the hyperbolic tangent as activation function.
+
+After 2012 the exploration of novel architectures took off, and in the last three years there is a preference for far deeper models. By stacking smaller kernels, instead of using a single layer of kernels with a large receptive field, a similar function can be represented with less parameters. These deeper architectures generally have a lower memory footprint during inference, which enable their deployment on mobile computing devices such as smartphones. \cite{Simo14} were the first to explore much deeper networks, and employed small, fixed size kernels in each layer. A 19-layer model often referred to as VGG19 or OxfordNet won the ImageNet challenge of 2014. 
+
+Since 2014, the performance on the ImageNet benchmark has saturated and it is difficult to assess whether the small increases in performance can really be attributed to 'better' and more sophisticated architectures. The advantage of the lower memory footprint these models provide is typically not as important for medical applications. Consequently, AlexNet or other simple models such as VGG are still popular for medical data, though recent landmark studies all use a version of GoogleNet called Inception v3 \cite{Guls16}. Whether this is due to a superior architecture or simply because the model is a default choice in popular software packages is again difficult to assess. 
+
+\subsection{Recurrent Neural Networks (RNNs)}
+\label{sec:rnns}
+Traditionally, RNNs were developed for discrete sequence analysis. They can be seen as a generalization of MLPs because both the input and output can be of varying length, making them suitable for tasks such as machine translation where a sentence of the source and target language are the input and output. In a classification setting, the model learns a distribution over classes $P(y | {\bf x}_{1}, {\bf x}_{2}, \ldots, {\bf x}_{T}; \Theta)$ given a sequence ${\bf x}_{1}, {\bf x}_{2}, \ldots, {\bf x}_{T}$, rather than a single input vector ${\bf x}$.
+
+The plain RNN maintains a latent or hidden state ${\bf h}$ at time $t$ that is the output of a non-linear mapping from its input ${\bf x}_{t}$ and the previous state ${\bf h}_{t-1}$:
+\begin{equation}
+{\bf h}_{t} = \sigma({\bf W}{\bf x}_{t} + {\bf R}{\bf h}_{t - 1} + {\bf b}),
+\end{equation}
+where weight matrices ${\bf W}$ and ${\bf R}$ are shared over time. For classification, one or more fully connected layers are typically added followed by a softmax to map the sequence to a posterior over the classes. 
+\begin{equation}
+P(y | {\bf x}_{1}, {\bf x}_{2}, \ldots, {\bf x}_{T}; \Theta) = \text{softmax}( {\bf h}_{T}; {\bf W}_{out}, {\bf b}_{out}).
+\end{equation}
+
+Although initially proposed for one-dimensional input, RNNs are increasingly applied to images. In natural images 'pixelRNNs' are used as autoregressive models, generative models that can eventually produce new images similar to samples in the training set. 
 
 \section{Model Evaluation} \label{ME} % DONE
 The performance of the classification models is then evaluated on the basis of percentage of records correctly classified on a test set with a known class label. Therefore, \textit{accuracy} and the \textit{error rate} of the model can be calculated by comparing the known class labels, and the classifiers predicted labels. A binary problem is composed of positive and negative classes and it can be evaluated with the following measures: True Positive (\acs{TP}) indicates the number of positives records correctly classified as positives, True Negative (\acs{TN}) measure indicates the number of negatives records correctly classified as negative, False Positive (\acs{FP}) measure is the number of negative records misclassified as positive and, finally, False Negative (\acs{FN}) measure is the number of positive records misclassified as negative. In this way, the accuracy of the error rate can be written as in (\ref{accuracy}) and (\ref{error}):
@@ -1264,12 +1364,15 @@ The observation of blood smears by skilled operators is one diagnostic procedure
 The progress of automated methods for the classification of blood cells from digitized images is a current problem in pattern recognition. These techniques can help to count the cells in human blood and, at the same time, be able to provide information on the morphological cells themselves. Unfortunately, for the analysis and processing of images, there are no standard techniques to apply to all types of images, but the processing must be adapted to the context. In particular, regarding the blood smear images, the processing techniques vary according to the type of blood cell to be analyzed. In the literature, few attempts of automated systems, based on techniques of image processing, able to identify and classify peripheral blood cells have been proposed.
 Moreover, the existing systems are only partially automated, combining manual steps to automated ones. Furthermore, most of them do not work on the entire analysis process, but on individual phases of the whole analysis process. This section will show the techniques most commonly used by different authors at different stages of the process. 
 
-The used methods of pre-processing depend on many variables, such as lighting conditions, the duration of the dye, defects caused by visual artifacts or not uniform background. The images should be processed to improve specific characteristics or to reduce further operations that could be required in the later stages of the analysis. The main issues addressed at this stage include noise reduction and enhancement of some structures of the images. Mohapatra et al. \cite{Mohapatra10a, Mohapatra10b, Mohapatra10c, Mohapatra14} used a median filter to remove the noise followed by an Unsharp filter. The median filter has been preferred to the average filter since it preserves details of edges and then they are enhanced with the use of the Unsharp filter. Other authors instead to enhance the quality of the images preferred operations based on the histogram such as contrast stretching or the histogram equalization to redistribute the grey level values. Often these two transformations have been used in combination between them or with other techniques, as the algorithm proposed in \cite{Madhloom} that starting from the grey scale image performs separately a contrast stretching and a histogram equalization. Then a series of arithmetic operations between the two images just obtained is performed in order to highlight the nuclei of leukocytes. The results are impressive because not only it
-enhances the nuclei of leukocytes, but it drastically reduces the number of the other blood components, making further steps much more straightforward.
+The used methods of pre-processing depend on many variables, such as lighting conditions, the duration of the dye, defects caused by visual artifacts or not uniform background. The images should be processed to improve specific characteristics or to reduce further operations that could be required in the later stages of the analysis. The main issues addressed at this stage include noise reduction and enhancement of some structures of the images. Mohapatra et al. \cite{Mohapatra10a, Mohapatra10b, Mohapatra10c, Mohapatra14} used a median filter to remove the noise followed by an Unsharp filter. The median filter has been preferred to the average filter since it preserves details of edges and then they are enhanced with the use of the Unsharp filter. Other authors preferred operations based on the histogram such as contrast stretching or the histogram equalization to redistribute the grey level values. Often these two transformations have been used together or with other techniques, as the algorithm proposed in \cite{Madhloom}. It starts from the greyscale image performs separately a contrast stretching and a histogram equalization. Then a series of arithmetic operations between the two images just obtained is performed in order to highlight the nuclei of leukocytes. The results are impressive because it either enhances the nuclei of leukocytes and it drastically reduces the number of the other blood components, making further steps much more straightforward.
 
-As said previously in the analysis of medical images different levels of segmentation are used. In particular, for what concerns peripheral blood images two main levels are used: the level of cells segmentation, which aims to separate whole cells from the background or plasma and the level of segmentation that tries to separate the various components inside the cell, such as the nucleus from the cytoplasm or intracellular parasites. Several authors have proposed methods for effective segmentation of the nucleus of leukocytes, while there are few attempts of segmentation of the cytoplasm. The characteristic generally used for segmentation is the intensity value of grey level images. However, many authors showed how the use of a single channel from different color spaces could be used to highlight differences between blood components. Indeed the nuclei of the white blood cells are more in contrast on the Green component of the RGB color space \cite{Cseke}, while the cytoplasm of the white blood cells is more evident on the Hue component \cite{Wu} or the Saturation component \cite{Halim} of the HSV color space. The Saturation component of the HSV color space is also useful to identify and separate erythrocytes \cite{DiR} when present in complex agglomerates of cells. Otherwise, they can be easily detected and counted with a threshold value computed using Zack algorithm from grey level images \cite{Berge}. Based on this knowledge many algorithms of region growing have been proposed \cite{Kovalev, Lez98, Lez02}. They use the pixels within the nuclei as seeds in order to segment the whole white blood cells. The cytoplasm is detected through iterative aggregation of the pixels surrounding the region of interest according to the homogeneity of the colors and the information of the gradient. Edge-based segmentation methods are rarely used in this contest since the boundaries between cells are not clearly defined. However, the performances of edge detection operations can be improved using morphological operators \cite{Piuri, Sco05} being able to connect in a better way the detected edges and restore the complete boundary of the cells. 
+As previously said, different levels of segmentation are used in medical images analysis. In particular, for what concerns peripheral blood images two main levels are used: the level of cells segmentation, which aims to separate whole cells from the background or plasma and the level of segmentation that tries to separate the various components inside the cell, such as the nucleus from the cytoplasm or intracellular parasites. Several authors have proposed methods for effective segmentation of the nucleus of leukocytes, while there are few attempts of segmentation of the cytoplasm. The characteristic generally used for segmentation is the intensity value of grey level images. However, many authors showed how the use of a single channel from different color spaces could be used to highlight differences between blood components. Indeed the nuclei of the white blood cells are more in contrast on the Green component of the RGB color space \cite{Cseke}, while the cytoplasm of the white blood cells is more evident on the Hue component \cite{Wu} or the Saturation component \cite{Halim} of the HSV color space. The Saturation component of the HSV color space is also useful to identify and separate erythrocytes \cite{DiR} when present in complex agglomerates of cells. Otherwise, they can be easily detected and counted with a threshold value computed using Zack algorithm from grey level images \cite{Berge}. Based on this knowledge many algorithms of region growing have been proposed \cite{Kovalev, Lez98, Lez02}. They use the pixels within the nuclei as seeds in order to segment the whole white blood cells. The cytoplasm is detected through iterative aggregation of the pixels surrounding the region of interest according to the homogeneity of the colors and the information of the gradient. Edge-based segmentation methods are rarely used in this contest since the boundaries between cells are not clearly defined. However, the performances of edge detection operations can be improved using morphological operators \cite{Piuri, Sco05} being able to connect in a better way the detected edges and restore the complete boundary of the cells. 
+A huge number of papers has been proposed in the literature concerning the application
+of clustering methods to the segmentation of medical images \cite{Karthikeyan2017}
 
-A further problem in the analysis of peripheral blood cell images is the presence of cells grouped together or adjacent, as shown in Fig. \ref{fig_clumps}. It does not allow an analysis of the single cells, such as the computation of shape descriptors or the proportion of cytoplasm and nucleus. A priori knowledge about the average size and shape of the cells allow working on sub-images extracted from the original image, by cutting a square around the nucleus previously segmented \cite{Kovalev, Sinha}. Thus, assuming that each sub-image has only one white blood cell using some restrictions on the shape and the color information it is possible to perform a clustering around the nucleus. Unfortunately, this assumption is not always true, and in fact, it is possible to find more than one nucleus on a sub-image that affects the result of the clustering. An improvement of this approach works on the whole images without using the a priori knowledges about the size and shape. It is possible thanks to the distance transform \cite{Maurer} that associates to each pixel of the binary image its distance from the border. Thus, the maximum distance obtained can be used as a marker for a subsequent segmentation step \cite{Malpica}, or the distance image can be used directly as a shape delimiter for a watershed segmentation \cite{Lindblad}. The main drawbacks of these approaches are that the cells should be perfectly segmented since they work directly on the binary images. Furthermore, since the distance transform, in this case, works like a shape delimiter, it can separate only small agglomerates of cells that should have an almost circular shape.
+A further problem in the analysis of peripheral blood cell images is the presence of cells grouped together or adjacent, as shown in Fig. \ref{fig_clumps}. It does not allow an analysis of the single cells, such as the computation of shape descriptors or the proportion of cytoplasm and nucleus. A priori knowledge about the average size and shape of the cells allow working on sub-images extracted from the original image, by cutting a square around the nucleus previously segmented \cite{Kovalev, Sinha}. Thus, assuming that each sub-image has only one white blood cell using some restrictions on the shape and the color information it is possible to perform a clustering around the nucleus. Unfortunately, this assumption is not always true, and in fact, it is possible to find more than one nucleus on a sub-image that affects the result of the clustering. An improvement of this approach works on the whole images without using the a priori knowledge about the size and shape. It is possible thanks to the distance transform \cite{Maurer} that associates to each pixel of the binary image its distance from the border. Thus, the maximum distance obtained can be used as a marker for a subsequent segmentation step \cite{Malpica}, or the distance image can be used directly as a shape delimiter for a watershed segmentation \cite{Lindblad}. The main drawbacks of these approaches are that the cells should be perfectly segmented since they work directly on the binary images. Furthermore, since the distance transform, in this case, works like a shape delimiter, it can separate only small agglomerates of cells that should have an almost circular shape.
+
+Finally, \cite{Chen2016} proposed a deep learning method for cells classification in a label-free environment. They also compared various learning algorithms including artificial neural network, support vector machine, logistic regression.
 
 \begin{figure}[h]
 	\centering
@@ -1280,7 +1383,10 @@ A further problem in the analysis of peripheral blood cell images is the presenc
 The step of feature extraction is essential in the analysis of peripheral blood cells, as only with significant features, the system will be able to discriminate the various types of cells, the cells affected by diseases from the normal ones or the presence of other abnormalities in the blood. The idea is to extract the descriptors that best approach to the visual patterns indicated by pathologists. The color and texture descriptors are indeed the most discriminatory features of blood cells. Generally, this kind of images is acquired using the RGB color space that allows good discrimination of platelets, red blood cells, and white blood cells, especially if the analysis is extended to all RGB channels \cite{Angulo}. However, the differentiation of subclasses of cells such as various types of leukocytes, usually requires the use of other color spaces, taking into account all the color channels or only the most discriminatory such as the H channel of the HSV color space \cite{Hengen}.
 Furthermore, geometrical features can be used to discriminate cells with abnormal size or with an irregular shape. Other geometrical features have explicitly been proposed to classify the type of nucleated cells since they can be distinguished not only using the ratio between cytoplasm and nucleus \cite{Piuri, Sco05, Sco06} but also extracting the number of lobes of the nucleus. Extract the number of lobes means to count the more substantial parts of the nucleus connected by thin filaments. It is not an easy task since the connection between the lobes sometimes can appear larger than average and thus, also a skilled operator, could count two small lobes as it was only one. A good approximation of the number of lobes can be obtained by iterative erosion of the nucleus. The number of lobes corresponds to the connected components with an area more significant than a prefixed parameter \cite{Piuri}.  
 
-Once the features have been extracted, they must be inserted in a process which classifies cells based on hematological concepts \cite{Biondi, Serbouti}. Different learning methods have been used to classify blood cells, but above all very different choices about the number of classes have been taken. The most frequent choice is the binary classification to distinguish healthy white blood cells from abnormal ones making use of the SVM classifier, which is excellent in the separation of binary classes with a pattern very close in space \cite{Mohapatra10a, Mohapatra10b, Mohapatra10c, Mohapatra14}. Instead, when the number of classes is higher the most used classifier have been the Neural Networks, performing a separation into the five types of leukocytes \cite{Sco06} or performing a separation into 7 classes, lymphocytes, neutrophils, eosinophils, other (monocytes and basophils), lymphocytic leukaemia L1, lymphocytic leukaemia L2 and non-lymphocytic leukaemia \cite{Buavirat}. 
+Once the features have been extracted, they must be inserted in a process which classifies cells based on hematological concepts \cite{Biondi, Serbouti}. 
+Different learning methods have been used to classify blood cells, but above all very different choices about the number of classes have been taken. The most frequent choice is the binary classification to distinguish healthy white blood cells from abnormal ones making use of the SVM classifier, which is excellent in the separation of binary classes with a pattern very close in space \cite{Mohapatra10a, Mohapatra10b, Mohapatra10c, Mohapatra14}. Mishra \cite{Mishra2017} showed that a highly appropriate feature extraction technique is required for the classification of the disease. Discrete Cosine Transform (DCT) has been used in association with a nucleus features extraction from the RGB image. Finally, they detect ALL on ALL-IDB images with SVM classifier.
+KNN classifier is also used, for example Abdeldaim et al. \cite{Abdeldaim2018} present a computer-aided ALL diagnosis system, which first segments each cell in the microscopic images, and then classifies each segmented cell to be normal or affected. The experiment based on ALL-IDB2 achieves the
+accuracy of 96.42\% with a KNN classifier. Instead, when the number of classes is higher the most used classifier have been the Neural Networks, performing a separation into the five types of leukocytes \cite{Sco06} or performing a separation into 7 classes, lymphocytes, neutrophils, eosinophils, other (monocytes and basophils), lymphocytic leukaemia L1, lymphocytic leukaemia L2 and non-lymphocytic leukaemia \cite{Buavirat}. 
 
 In the following chapter, you will see the algorithms proposed to create a fully automated system for peripheral blood images. For clarity, each step of the whole process has been discussed separately following the order mentioned before and used for most of the methods presented in the literature. Furthermore, to make a comparison with the state-of-the-art, each step of the proposed method has been tested using the same dataset presented below.
 
@@ -1531,9 +1637,9 @@ A blood smear image, obtained through a microscope, is presented in fig. \ref{fi
 On the other hand, leukocytes without granules are called agranulocytes (composed of lymphocytes and monocytes). Erythrocytes do not have any subcategory even though malaria parasites (MPs) can infect them, consequently modifying their shape, morphology or coloration conditions. In particular, fig. \ref{fig5_malaria_types} shows several examples of malaria parasites in their different life stages and type.
 Although MPs infect only RBCs, a blood smear image representing both WBCs (particularly granulocytes) and MPs could be tough to analyze because of the similarities in coloration and shape between parasites and WBC grains, as shown in fig. \ref{fig4_colour}.
 
-\begin{figure}[!t]
-	\centering    
-	\includegraphics[width=8cm]{images/malaria/f2_typical_bb}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/malaria/f2_typical_bb}
 	\caption{\label{fig4_colour} Example of blood smear image acquired with a good coloration and illumination scheme. Three different regions of interest characterize the image: an eosinophil granulocyte on the bottom left (yellow bounding box), a schizont Plasmodium Falciparum on bottom center (green bounding box) and the erythrocytes. Please note that some platelets are also present (blue bounding box). Courtesy of CHUV, Lausanne.}
 \end{figure}
 MP-IDB collects four malaria parasite species: Plasmodium Falciparum, Ovale, Malariae, and Vivax, in four different life-cycle stages: ring, trophozoite, schizont, and gametocyte. Plasmodium Falciparum trophozoite and schizont are very rare, and they are not present in our data collection. A complete set of examples, extracted from the dataset, are shown in fig. \ref{fig6_malaria_stages}. The morphology, the size and the presence or absence of malarial pigment of the parasites define their life-cycle-stage. The species differ in the changes of infected cell’s shape, the presence of some peculiar dots and the morphology of the parasite in some of the life-cycle-stages \cite{Somasekar2011}.
@@ -1544,15 +1650,6 @@ An automated malaria parasites analysis on blood smears usually comprises four d
 	\item Feature extraction: relevant characteristics (e.g., shape, color, texture) are extracted from the different region of interest to train an automatic parasite analyzer.
 	\item Classification: several classification schemes can be performed. Hierarchically, cells are classified in red blood cells and white blood cells. Afterward, red blood cells are classified in affected by parasite(s) or not. In the end, parasites are classified in their type and life stage. Parasites potentially can also be present outside the cells. In this case, they should need a more specific and dedicated analysis.
 \end{enumerate}
-
-\begin{figure}[!t]
-	\centering    
-	\includegraphics[width=2.9cm]{images/malaria/f1a}
-	\includegraphics[width=2.9cm]{images/malaria/f1b}
-	\includegraphics[width=2.9cm]{images/malaria/f1c}
-	\includegraphics[width=2.9cm]{images/malaria/f1d}
-	\caption{\label{f1_img_types} Different illumination conditions could generate unconventional colour schemes in images. This is due to the absence of a standardized acquisition procedure. From left to right: same smear acquired with four microscope brightness levels. Courtesy of CHUV, Lausanne.}
-\end{figure}
 
 \chapter{WBCs Segmentation}
 \label{wbcs_segmentation}
@@ -2074,7 +2171,7 @@ The just obtained labeled image can be used as a mask over the original image in
 
 \begin{figure*}[h]
 	\centering
-	\includegraphics[height=0.39\textwidth]{images/2016_2_sitis/Schema}
+	\includegraphics[width=0.90\textwidth]{images/2016_2_sitis/Schema}
 	\caption{\label{fig:Schema}Pipeline of this approach.}
 \end{figure*}
 
@@ -2119,7 +2216,16 @@ The annotation of the dataset images is described as follows. The image filename
 These dataset images have been acquired with the same microscope. Unfortunately, lots of them suffer from different issues, like typical non-uniform background illuminations and overexposed borders, due to the illumination of the microscope lamp (visible in fig. \ref{f1_img_types}). It also causes that the regions of interest can have different coloration, also due to the age of the analyzed smears. It justifies a strong pre-processing step to make the image conditions the most similar possible, to realize an automated procedure. Even though the images remain intelligible, classic segmentation methods, e.g., based on thresholding, can suffer from these issues.
 The main targets related to the creation of this dataset are to show how malaria parasite analysis is currently performed and which are the principal issues to deal with. Moreover, we have proposed a public dataset of blood samples, specifically designed to evaluate and compare the performances in segmentation or classification of malaria parasites by computer vision techniques. Our aim in realizing MP-IDB is to offer a robust image processing dataset, specifically designed to help in encourage new studies about malaria image analysis under a fair comparative approach based on a standard dataset, like what ALL-IDB \cite{Donida} has offered for leukemia detection and white blood cells analysis \cite{DiRuberto2016}. 
 
-\begin{table*}[t]
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.23\textwidth]{images/malaria/f1a}
+	\includegraphics[width=0.23\textwidth]{images/malaria/f1b}
+	\includegraphics[width=0.23\textwidth]{images/malaria/f1c}
+	\includegraphics[width=0.23\textwidth]{images/malaria/f1d}
+	\caption{\label{f1_img_types} From left to right: same smear acquired with four microscope brightness levels. Different illumination conditions could generate unconventional colour schemes in images. Courtesy of CHUV, Lausanne.}
+\end{figure}
+
+\begin{table*}[h]
 	\caption{Composition of dataset's images}\label{table1}
 	\centering
 	\setlength\tabcolsep{0.2cm}
@@ -2148,8 +2254,65 @@ The main targets related to the creation of this dataset are to show how malaria
 	\end{tabular}
 \end{table*}
 
+\subsection{Homomorphic filtering for image enhancement}
+Normally, pre-processing methods are used to enhance images. In section \ref{preproc}, we listed a series of linear operators. The objective of this section, instead, is to show how the techniques of multiplicative homomorphic systems are used for enhancing the images in frequency domain, rather than in spacial domain. They are useful because images that make part of MP-IDB has an irregular background due to the illumination lamp, as shown in Fig. \ref{f1_homo}.
+The image can be characterized by two components, the amount of incident source illumination and amount of illumination reflected by the object. These are called the illumination and reflectance components of the image. The illumination-reflectance model can be used to develop a frequency domain procedure for improving the appearance of an image by simultaneous gray-level range compression and contrast enhancement. Here, the key to the approach is the separation of the illumination and the reflectance components.
+An image as a function can be expressed as the product of illumination and reflectance components as follows:
+
+\begin{equation}\label{homo1}
+F(x,y) = I(x,y) * R(x,y)
+\end{equation}
+
+Equation \ref{homo1} cannot be used directly to operate separately on the frequency components of illumination and reflectance because the Fourier transform of the product of two functions is not separable. Instead the function can be represented as a logarithmic function wherein the product of the Fourier transform can be represented as the sum of the illumination and reflectance components as shown below:
+\begin{equation}\label{homo2}
+ln(x,y) = ln(I(x,y)) + ln(R(x,y))
+\end{equation}
+
+The Fourier transform of equation \ref{homo2} is:
+\begin{equation}\label{homo3}
+Z(u,v) = Fi(u,v) + Fr(u,v)
+\end{equation}
+
+The Fourier transformed signal is processed by means of a filter function H(u,v) and the resulting function is inverse Fourier transformed. Finally, inverse exponential operation yields an enhanced image. This enhancement approach is termed as homomorphic filtering. 
+To get an estimate of $log(I(x,y,c))$, the idea is to segment $f(x,y,c)$ into object and background. This can be done, for example, by thresholding the green plane or, better, the saturation plane, by using the Otsu threshold. The saturation plane indicates the degree of white in a given color and it is observed that the background has a very low saturation whereas the cells have a larger saturation. Because the saturation’s histogram exhibits a clear valley, the optimal two classes Otsu classifier can be used.
+The low frequency background is then estimated, channel by channel, by fitting a quadratic function to the spatial evolution of $f(x,y,c)$ at the background pixels.
+
+\begin{equation}\label{homo4}
+f_{bg}(x,y,c)=\theta(1,c)+\theta(2,c)x+\theta(3,c)x^2 +\theta(4,c)xy+\theta(5,c)y+\theta(6,c)y^2  
+\end{equation}
+
+The coefficients $\theta(1) ... \theta(6)$ are obtained by a standard least square optimization. Note that for numerical reasons, the x, y coordinates are centered on the image center.
+When the background I(x,y) has been estimated for each channel R, G and B, its maximum Max(c), over the entire image is computed and the corrected channel is computed as such:
+
+\begin{equation}\label{homo5}
+f_{corr} (x, y, c) = 10(flog (x,y,c)+M ax(c)−fbg (x,y,c))
+\end{equation}
+
+After having computed \ref{homo5}, c = r,g,b, the final image is formed by concatenating the 3 planes.The results are shown in the following figures:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{images/homo/homo1}
+	\includegraphics[width=0.3\textwidth]{images/homo/homo2}
+	\includegraphics[width=0.23\textwidth]{images/homo/homo3}
+	\includegraphics[width=0.3\textwidth]{images/homo/homo4}
+	\includegraphics[width=0.3\textwidth]{images/homo/homo5}
+	\caption{\label{f1_homo} From left to right: original RGB image, Saturation channel of HSV space, Histogram of the saturation plane with a vertical line indicating the Otsu threshold.
+	Underneath:  segmentation, polynomial estimation of the background evolution. Courtesy of CHUV, Lausanne.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.23\textwidth]{images/homo/homo6}
+	\includegraphics[width=0.23\textwidth]{images/homo/homo7}
+	\includegraphics[width=0.23\textwidth]{images/homo/homo8}
+	\includegraphics[width=0.23\textwidth]{images/homo/homo9}
+	\caption{\label{f2_homo} From left to right: original RGB image, corrected image by the described method with S channel, corrected image by the described method with G channel, horizontal profiles at the center of the image. In red, the original image, in blue, the proposed with S channel, and in green the proposed method with G channel. Courtesy of CHUV, Lausanne.}
+\end{figure}
+The two proposed methods are very similar, the difference between them lies in the segmentation of the background, the proposed method is based on the saturation plane whereas the other method is based on the green plane. The profile shows, in this case, that the saturation plane performs better than the green plane by enlighting more the image on its right side.
+
+
 \part{Conclusions} 
-\chapter*{Conclusions} \label{tre}
+\chapter*{Conclusions and future works} \label{tre}
 This thesis addressed the automatized visual analysis of peripheral blood cells images, with particular efforts on WBC analysis firstly and RBC, secondly. It has been focused on cells analysis and counting for diagnosing diseases using a microscope, a crucial step to confirm if and which illness is present. The main purpose has been the analysis of the outstanding issues in a CAD from digital microscopy images, particularly Acute Lymphoblastic Leukemia for WBCs and malaria for RBCs. It shows the studies addressed to some possible solutions for cells analysis and counting. Special efforts have been focused on strategies to represent with meaningful information the visual content of digital images. Indeed this issue is critical in artificial vision and becomes further challenging in medical imaging, considering that there is not a color standardization for the staining and acquisition of digital slides. There are several color differences or intensity variations between different slides, due to the quality of the biological sample and the sample preparation, such as the quantity of dye used during the staining procedure, or due to different acquisition systems and the image capturing parameters, such as the environment illumination. Furthermore, mainly in peripheral blood images, such variability may be present in the same slide, due to the presence of uneven lighting caused by the microscope light. Thus, by computing descriptors that ignore this variability, it is possible to extract from the images more general information that may be used by conventional learning models for distinguishing different biological concepts, avoiding any dependency on a specific dataset. 
 
 Peripheral blood image analysis has been faced with special efforts towards the segmentation and the counting of both types of cells, either leukocytes and erythrocytes, proposing different segmentation algorithms able to isolate the cell of interest from images acquired in different illumination conditions and with different staining strategies.
@@ -2158,13 +2321,18 @@ The identification of single WBCs is also essential for the diagnosis of leukemi
 
 Moreover, the identification of RBCs has also been made in standard cell conditions, which is represented by the dataset in WBC analysis. For this reason, this work also contains a new public dataset specifically built and designed for malaria analysis purposes.
 
-Finally, it is important to note that many of the proposed approaches could also be used in different medical imaging system and also for artificial vision system far from the medical field. It could be possible thanks to the generality of the proposed approaches, that is designed to overcome many different issues, such as the color differences, that make them independent from dataset and in some cases also from the problem itself.
+It is important to note that many of the proposed approaches could also be used in different medical imaging system and also for artificial vision system far from the medical field. It could be possible thanks to the generality of the proposed approaches, that is designed to overcome many different issues, such as the color differences, that make them independent from dataset and in some cases also from the problem itself.
 
 Despite the good results obtained with both case studies, further improvements can be realized for peripheral blood image analysis. Many other phases can be integrated. 
 In particular, a first improvement could arise from a detailed analysis of the WBCs in order to detect the type of disease that can affect a cell. 
 Moreover, the realized system could also be extended to malaria parasite analysis by using the proposed dataset. Once single cells of each type have been detected and segmented, they can be analyzed in detail, to detect the presence of the parasite, like malaria parasite or to diagnose disease that can affect that particular cell type.   
 It can even be extended to provide new measures, like the parasitemia percentage of an image.
 These measures can be diagnostic by themselves, since that an overproduction or an underproduction is always a symptom of problems related to the health of the bone marrow. Adapting the system to bone marrow smear images analysis could be another exciting and useful task. Cells in bone marrow differ from peripheral blood cell images because there are only immature cells, so that shape and colors are not the same of peripheral blood cells either due to the absence of standard acquisition techniques or their characteristics. An example is shown underneath.
+
+Finally, we should consider another important aspect which is arising a lot of importance in the community. Deep learning is increasingly used in computer vision and medical image analysis field. However, it is clear that applying deep learning algorithms to medical image analysis presents several unique challenges. The lack of large training data sets is often mentioned as an obstacle, especially in the case of microscopic image analysis. Although medical procedures nowadays tend to release a lot of images from medical procedures, one of the main challenge is also the acquisition of relevant annotations/labeling for these images.
+Even when data is annotated by domain expert, label noise can be a significant limiting factor in developing algorithms, whereas in computer vision the noise in the labeling of images is typically relatively low. Training a deep learning system on such data requires careful consideration of how to deal with noise and uncertainty in the reference standard. One partial solution could be incorporating labeling uncertainty directly in the loss function, but this is still an open challenge.
+In medical imaging often classification or segmentation is presented as a binary task: normal versus abnormal, object versus background. However, this is often a gross simplification as both classes can be highly heterogeneous. For example, in our case, the normal category consists of completely normal blood cells but also several categories of leukemia or parasites exist for the abnormal category. This often leads to systems that are extremely good at excluding the most common normal subclasses, but fail miserably on several rare ones. A straightforward solution would be to turn the deep learning system in a multi-class system by providing it with detailed annotations of all possible subclasses. From a certain point of view, this thesis also faced this issue at a first approximation. More efforts can be made in order to improve the solution. 
+
 
 \begin{figure}[h]
 	\centering
@@ -2339,14 +2507,14 @@ The species differ in the changes of infected cell's shape, the presence of some
 Malarial parasite trophozoites are generally ring-shaped, 1-2 microns in size, although other forms (ameboid and band) may also exist. The sexual forms of the parasite (gametocytes) are much larger and 7-14 microns in size. P. falciparum is the largest and is banana shaped while others are smaller and round. P. vivax causes stippling of infected red cells.
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.98\textwidth]{images/malaria_th/mal_falc}
+	\includegraphics[width=0.90\textwidth]{images/malaria_th/mal_falc}
 	\caption{\label{fig:falci_th} Plasmodium Falciparum schematic stages of life. Courtesy of \cite{Med_cdc}.
 	Fig. 1: Normal red cell; Figs. 2-18: Trophozoites (among these, Figs. 2-10 correspond to ring-stage trophozoites); Figs. 19-26: Schizonts (Fig. 26 is a ruptured schizont); Figs. 27, 28: Mature macrogametocytes (female); Figs. 29, 30: Mature microgametocytes (male).}
 \end{figure}
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.98\textwidth]{images/malaria_th/mal_mal}
+	\includegraphics[width=0.90\textwidth]{images/malaria_th/mal_mal}
 	\caption{\label{fig:mal_th} Plasmodium Malariae schematic stages of life. Courtesy of \cite{Med_cdc}.
 		Fig. 1: Normal red cell; Figs. 2-5: Young trophozoites (rings); Figs. 6-13: Trophozoites; Figs. 14-22: Schizonts; Fig. 23: Developing gametocyte; Fig. 24: Macrogametocyte (female); Fig. 25: Microgametocyte (male).}
 \end{figure}
@@ -2361,15 +2529,15 @@ Malarial parasite trophozoites are generally ring-shaped, 1-2 microns in size, a
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.98\textwidth]{images/malaria_th/mal_viv}
+	\includegraphics[width=0.90\textwidth]{images/malaria_th/mal_viv}
 	\caption{\label{fig:vivax_th} Plasmodium Vivax schematic stages of life. Courtesy of \cite{Med_cdc}.
 		Fig. 1: Normal red cell; Figs. 2-6: Young trophozoites (ring stage parasites); Figs. 7-18: Trophozoites; Figs. 19-27: Schizonts; Figs. 28 and 29: Macrogametocytes (female); Fig. 30: Microgametocyte (male).}
 \end{figure}
 
 
 
-\ifdraft{
-  \listoffixmes
-}{}
+%\ifdraft{
+%  \listoffixmes
+%}{}
 
 \end{document}
