@@ -1,0 +1,483 @@
+\documentclass[10pt,twoside,openright,english]{book}
+
+\usepackage{algorithm2e}
+\usepackage{alltt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{appendix}
+\usepackage{atbegshi}
+\usepackage[english]{babel} 
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage[labelfont={normalfont, bf}, font=it]{caption}
+\usepackage{cite}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[bottom]{footmisc} 
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{makeidx}         % allows index generation
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{moreverb}
+\usepackage{multicol}   
+\usepackage{multirow}     
+\usepackage[figuresright]{rotating}
+\usepackage{setspace}
+\usepackage{sidecap}
+\usepackage{subcaption}
+\usepackage{xspace}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+
+\usepackage{acro}
+
+\usepackage[pdfa,
+			pdfauthor =  {{Andrea Loddo}},
+			pdftitle = {{Microscopic Blood Images Analysis by Computer Vision Techniques}},
+			pdfsubject = {{ }},
+			pdfkeywords = {{wbc; rbc; malaria; leukemia}},
+			citecolor = {black}, 
+			urlcolor = {black},
+			linkcolor = {black}, 
+			colorlinks = {true}, 
+			bookmarksopen = {true}, 
+			pagebackref = {true}]{hyperref}
+
+%PER LA STAMPA SU ilmiolibro.it
+\geometry
+{
+	paperwidth = 145mm,
+	paperheight = 220mm,
+	headsep = 15pt,
+	footskip = 20pt,
+	left = 18mm,
+	right = 15mm,
+	top = 10mm,
+	bottom = 13mm,
+	includehead = true,
+	includefoot = true,
+	twoside = true
+}
+
+\newcommand{\myTitle}{Microscopic Blood Images Analysis by Computer Vision Techniques}
+
+\newcommand{\myAuthor}{Andrea Loddo}
+
+\newcommand{\todo} [1]{{\textcolor{red}{ToDo: #1}}}
+
+\DeclareAcronym{ALL}{
+	short = ALL ,
+	long  = Acute Lymphoblastic Leukaemia,
+	class = abbrev
+}
+\DeclareAcronym{ALL-IDB}{
+	short = ALL-IDB ,
+	long  = Acute Lymphoblastic Leukaemia Image Database,
+	class = abbrev
+}
+\DeclareAcronym{ANN}{
+	short = ANN ,
+	long  = Artificial Neural Networks ,
+	class = abbrev
+}
+\DeclareAcronym{ASM}{
+	short = ASM ,
+	long  = Angular Second Moment ,
+	class = abbrev
+}
+\DeclareAcronym{Aut}{
+	short = Aut ,
+	long  = Autocorrelation ,
+	class = abbrev
+}
+\DeclareAcronym{CAD}{
+	short = CAD ,
+	long  = Computer Aided Diagnosis,
+	class = abbrev
+}
+\DeclareAcronym{CBC}{
+	short = CBC ,
+	long  = Complete Blood Count,
+	class = abbrev
+}
+\DeclareAcronym{CHUV}{
+	short = CHUV ,
+	long  = Centre Hospitalier Universitaire Vaudois,
+	class = abbrev
+}
+\DeclareAcronym{Con}{
+	short = Con ,
+	long  = Contrast ,
+	class = abbrev
+}
+\DeclareAcronym{Cor}{
+	short = Cor ,
+	long  = Correlation ,
+	class = abbrev
+}
+\DeclareAcronym{CP}{
+	short = CP ,
+	long  = Cluster Prominence ,
+	class = abbrev
+}
+\DeclareAcronym{CS}{
+	short = CS ,
+	long  = Cluster Shade ,
+	class = abbrev
+}
+\DeclareAcronym{DAG}{
+	short = DAG ,
+	long  = Directed Acyclic Graph ,
+	class = abbrev
+}
+\DeclareAcronym{DAve}{
+	short = DAve ,
+	long  = Difference Average ,
+	class = abbrev
+}
+\DeclareAcronym{DEnt}{
+	short = DEnt ,
+	long  = Difference Entropy ,
+	class = abbrev
+}
+\DeclareAcronym{DVar}{
+	short = DVar ,
+	long  = Difference Variance ,
+	class = abbrev
+}
+\DeclareAcronym{Ene}{
+	short = Ene ,
+	long  = Energy ,
+	class = abbrev
+}
+\DeclareAcronym{Ent}{
+	short = Ent ,
+	long  = Entropy ,
+	class = abbrev
+}
+\DeclareAcronym{FN}{
+	short = FN ,
+	long  = False Negative ,
+	class = abbrev
+}
+\DeclareAcronym{FNR}{
+	short = FNR ,
+	long  = False Negative Rate,
+	class = abbrev
+}
+\DeclareAcronym{FP}{
+	short = FP ,
+	long  = False Positive ,
+	class = abbrev
+}
+\DeclareAcronym{FPR}{
+	short = FPR ,
+	long  = False Positive Rate,
+	class = abbrev
+}
+\DeclareAcronym{FS}{
+	short = FS ,
+	long  = Fuzzy Sets,
+	class = abbrev
+}
+\DeclareAcronym{GLCM}{
+	short = GLCM ,
+	long  = Gray Level Co-occurrence Matrix ,
+	class = abbrev
+}
+\DeclareAcronym{GLDM}{
+	short = GLDM ,
+	long  = Gray Level Difference Matrix ,
+	class = abbrev
+}
+\DeclareAcronym{GLN}{
+	short = GLN ,
+	long  = Grey Level Non-uniformity ,
+	class = abbrev
+}
+\DeclareAcronym{GLRLM}{
+	short = GLRLM ,
+	long  = Gray Level Run-Length Matrix ,
+	class = abbrev
+}
+\DeclareAcronym{HGLRE}{
+	short = HGLRE ,
+	long  = High Grey Level Run Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{Hom}{
+	short = Hom ,
+	long  = Homogeneity ,
+	class = abbrev
+}
+\DeclareAcronym{HSC}{
+	short = HSC ,
+	long  = Hematopoietic Stem Cells,
+	class = abbrev
+}
+\DeclareAcronym{IDM}{
+	short = IDM ,
+	long  = Inverse Difference Moment ,
+	class = abbrev
+}
+\DeclareAcronym{IFS}{
+	short = IFS ,
+	long  = Intuitionistic Fuzzy Sets,
+	class = abbrev
+}
+\DeclareAcronym{LBP}{
+	short = LBP ,
+	long  = Local Binary Pattern ,
+	class = abbrev
+}
+\DeclareAcronym{LGLRE}{
+	short = LGLRE ,
+	long  = Low Grey Level Run Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{LoG}{
+	short = LoG ,
+	long  = Laplacian of Gaussian ,
+	class = abbrev
+}
+\DeclareAcronym{LRE}{
+	short = LRE ,
+	long  = Long Run Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{LRHGLE}{
+	short = LRHGLE ,
+	long  = Long Run High Grey Level Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{LRLGLE}{
+	short = LRLGLE ,
+	long  = Long Run Low Grey Level Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{MC}{
+	short = MC ,
+	long  = Measure of Correlation ,
+	class = abbrev
+}
+\DeclareAcronym{MP}{
+	short = MP ,
+	long  = Maximum Probability ,
+	class = abbrev
+}
+\DeclareAcronym{NB}{
+	short = NB ,
+	long  = Naive Bayes,
+	class = abbrev
+}
+\DeclareAcronym{NN}{
+	short = NN ,
+	long  = Nearest Neighbors ,
+	class = abbrev
+}
+\DeclareAcronym{NNS}{
+	short = NNS ,
+	long  = Nearest Neighbors Search,
+	class = abbrev
+}
+\DeclareAcronym{PCA}{
+	short = PCA ,
+	long  = Principal Component Analysis ,
+	class = abbrev
+}
+\DeclareAcronym{PM}{
+	short = PM ,
+	long  = Product Moment ,
+	class = abbrev
+}
+\DeclareAcronym{RBC}{
+	short = RBC ,
+	long  = Red Blood Cell,
+	class = abbrev
+}
+\DeclareAcronym{RBF}{
+	short = RBF ,
+	long  = Radial Basis Function ,
+	class = abbrev
+}
+\DeclareAcronym{RLN}{
+	short = RLN ,
+	long  = Run Length Non-uniformity ,
+	class = abbrev
+}
+\DeclareAcronym{ROI}{
+	short = ROI ,
+	long  = Region of Interest,
+	class = abbrev
+}
+\DeclareAcronym{RP}{
+	short = RP ,
+	long  = Run Percentage ,
+	class = abbrev
+}
+\DeclareAcronym{SAve}{
+	short = SAve ,
+	long  = Sum Average ,
+	class = abbrev
+}
+\DeclareAcronym{SEnt}{
+	short = SEnt ,
+	long  = Sum Entropy ,
+	class = abbrev
+}
+\DeclareAcronym{SRE}{
+	short = SRE ,
+	long  = Short Run Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{SRHGLE}{
+	short = SRHGLE ,
+	long  = Short Run High Grey Level Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{SRLGLE}{
+	short = SRLGLE ,
+	long  = Short Run Low Grey Level Emphasis ,
+	class = abbrev
+}
+\DeclareAcronym{SVar}{
+	short = SVar ,
+	long  = Sum Variance ,
+	class = abbrev
+}
+\DeclareAcronym{SVM}{
+	short = SVM ,
+	long  = Support Vector Machine ,
+	class = abbrev
+}
+\DeclareAcronym{TN}{
+	short = TN ,
+	long  = True Negative ,
+	class = abbrev
+}
+\DeclareAcronym{TNR}{
+	short = TNR ,
+	long  = True Negative Rate,
+	class = abbrev
+}
+\DeclareAcronym{TP}{
+	short = TP ,
+	long  = True Positive ,
+	class = abbrev
+}
+\DeclareAcronym{TPR}{
+	short = TPR ,
+	long  = True Positive Rate ,
+	class = abbrev
+}
+\DeclareAcronym{Var}{
+	short = Var ,
+	long  = Variance ,
+	class = abbrev
+}
+\DeclareAcronym{WBC}{
+	short = WBC ,
+	long  = White Blood Cell,
+	class = abbrev
+}
+\DeclareAcronym{WBCC}{
+	short = WBCC ,
+	long  = White Blood Cell Count,
+	class = abbrev
+}
+
+
+\begin{document}
+
+\include{frontpage1} 	%Copertina per il caricamento
+%\include{frontpage2} 	%Copertina per la stampa
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\include{quote}
+
+\include{global_abstract}
+
+\frontmatter
+%
+\tableofcontents 	%Indice
+
+
+\pagestyle{empty}
+
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\lfoot
+[\hrule \vspace{4pt} \footnotesize{\myAuthor \hfill \textit{\myTitle}}]
+{\hrule \vspace{4pt} \footnotesize{\myAuthor \hfill \textit{\myTitle}}}
+\cfoot{}
+\rfoot[]{}
+
+\lhead
+[\footnotesize{\thepage}]
+{\footnotesize{\leftmark}}
+\chead[]{}
+
+\rhead
+[\footnotesize{\leftmark}]
+{\footnotesize{\thepage}}
+
+\mainmatter
+%===== GLOBAL INTRODUCTION =======
+%\part{Introduction} \label{zero}
+\include{global_introduction}	%OK
+
+
+
+%===== PART 1 =====================
+\part{Digital Microscopy CAD} \label{uno}
+
+\include{digital_microscopy}	
+
+%===== PART 2 =====================
+\part{CAD for Peripheral Blood Images} \label{due}
+
+\include{cad}	%OK
+
+%===== PART 3 =======================
+\part[Conclusions and future works]{Conclusions} \label{tre}
+
+\include{conclusions}		%OK
+
+
+%===================================
+% TEST
+%===================================
+
+%\include{ilmiolibro_test}
+
+%===================================
+% Appendici
+%===================================
+\appendix 
+\include{appendix}
+
+%===================================
+% Bibliografia
+%===================================
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliographystyle{eg-alpha-doi}
+\bibliographystyle{alpha}
+\bibliography{biblio}
+
+\addcontentsline{toc}{chapter}{List of figures}
+\listoffigures
+
+\end{document}
